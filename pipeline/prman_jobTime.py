@@ -1,3 +1,12 @@
+'''
+Sums the total elapsed time of all rendered images of a Pixar Renderman batch job. 
+
+It reads the data from the job XML files, so these are required!
+
+Run the command line:
+python prman_jobTime.py /path/to/jobFolder
+'''
+
 import os, sys
 import xml.etree.ElementTree as ET
 
