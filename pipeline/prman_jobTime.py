@@ -24,7 +24,7 @@ def readRenderTime(file):
 def updateProgress(count, total):
 	p = count / float(total) * 100
 	sys.stdout.write('\r')
-	sys.stdout.write("progress: %d%%" % (p))
+	sys.stdout.write("processing files: %d%%" % (p))
 	sys.stdout.flush()
 
 
@@ -46,7 +46,7 @@ def process():
 					
 
 		# header
-		print("\n%15s %10s %15s" % ("", "h.mm.ss", "seconds"))
+		print("\n\n%15s %10s %15s" % ("", "h.mm.ss", "seconds"))
 
 		# divider
 		print("------------------------------------------")
