@@ -44,7 +44,7 @@ ffmpeg.exe %input_args% %output_args% %lib% %scale_args% "%output%%format%"
 :: delete the job text file and
 del __ffmpeg_job.txt
 
-cls
+echo.
 echo Done! Saved file to:
 echo %input%%output%%format%
 echo.
