@@ -3,7 +3,7 @@
 set format=.mp4
 set lib=-c:v libx264
 
-echo Convert to MP4 (H.264) 1920x1080
+echo Convert image sequence to MP4 (H.264) 1920x1080
 echo.
 
 
