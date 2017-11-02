@@ -2,7 +2,7 @@
 
 ## Requirements
 
-FFMPEG must be located in `/ffmpeg/bin/ffmpeg/ffmpeg.exe` relative to the script's directory. Builds can be downloaded from [https://www.ffmpeg.org/](https://www.ffmpeg.org/)
+FFMPEG must be located in `/ffmpeg/bin/ffmpeg/ffmpeg.exe` relative to the script's directory. Builds can be downloaded from [https://www.ffmpeg.org/](https://www.ffmpeg.org/).
 
 ### convert-image-sequence.bat
 Takes a folder containing either PNG or JPG (not both!) images and converts them to a video (MP4 or WebM). 
