@@ -37,14 +37,14 @@ echo.
 set format=
 set lib=
 
-set /p format_option= Enter number: 
+set /p format_option= Enter number:
 
-if %format_option%==1 (
+if "%format_option%"=="1" (
 	set format=.mp4
 	set lib=-c:v libx264
 )
 
-if %format_option%==2 (
+if "%format_option%"=="2" (
 	set format=.webm
 	set lib=-c:v libvpx-vp9
 )
@@ -70,7 +70,7 @@ set input_args=-i %input%
 set output_args=-crf 30 -c copy -b:v 0
 set scale_args=-vf scale=w=1920:h=1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2
 
-ffmpeg.exe -loglevel warning %input_args% %output_args% %lib% %scale_args% "%output%%format%"
+ffmpeg.exe -loglevel error %input_args% %output_args% %lib% %scale_args% "%output%%format%"
 
 echo.
 echo Done! Saved file to:
