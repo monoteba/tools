@@ -7,7 +7,7 @@ set start_path=%CD%
 cd %start_path%
 cls
 echo CONVERT VIDEO
-echo Resolution: 1920x1080
+echo Resolution: Original
 echo Frame-rate: Original
 echo.
 
@@ -23,15 +23,16 @@ set input_path=
 :: goto to folder of video
 for %%a in (%input%) do (
 	set input_path="%%~dpa"
-	cd %input_path%
 )
 
 :: ask for video format
 :prompt
 echo.
 echo Enter number of video format to use:
-echo 1: MP4/H.264
-echo 2: WebM
+echo 1: MP4 (H.264)
+echo 2: WebM (VP9)
+echo 3: Prores HQ (422)
+echo 4: Prores HQ (4444)
 echo.
 
 set format=
@@ -39,14 +40,28 @@ set lib=
 
 set /p format_option= Enter number:
 
+:: mp4 h.264
 if "%format_option%"=="1" (
 	set format=.mp4
-	set lib=-c:v libx264
+	set lib=-c:v libx264 -crf 30 
 )
 
+:: webm vp9
 if "%format_option%"=="2" (
 	set format=.webm
-	set lib=-c:v libvpx-vp9
+	set lib=-c:v libvpx-vp9 -crf 30 
+)
+
+:: prores 422
+if "%format_option%"=="3" (
+	set format=.mov
+	set lib=-c:v prores_ks -profile:v 3 -qscale:v 5 -vendor ap10 -pix_fmt yuv422p10le
+)
+
+:: prores 4444
+if "%format_option%"=="4" (
+	set format=.mov
+	set lib=-c:v prores_ks -profile:v 4444 -qscale:v 5 -vendor ap10 -pix_fmt yuva444p10le
 )
 
 if not defined format (
@@ -67,10 +82,11 @@ echo.
 
 :: convert!
 set input_args=-i %input%
-set output_args=-crf 30 -c copy -b:v 0
+set output_args=-c copy -b:v 0
 set scale_args=-vf scale=w=1920:h=1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2
+set scale_args=
 
-ffmpeg.exe -loglevel error %input_args% %output_args% %lib% %scale_args% "%output%%format%"
+ffmpeg.exe -loglevel info %input_args% %output_args% %lib% %scale_args% "%input_path:"=%%output%%format%"
 
 echo.
 echo Done! Saved file to:

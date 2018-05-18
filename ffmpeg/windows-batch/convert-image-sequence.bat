@@ -8,7 +8,7 @@ cd %start_path%
 cls
 echo CONVERT IMAGES TO VIDEO
 echo Resolution: 1920x1080
-echo Frame-rate: 24 (input is 12)
+echo Frame-rate: output=24, input=12
 echo.
 
 :: add ffmpeg to path
@@ -80,7 +80,7 @@ set input_args=-r 12 -f concat -safe 0 -i __ffmpeg_job.txt
 set output_args=-r 24 -crf 30 -c copy -b:v 0
 set scale_args=-vf scale=w=1920:h=1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2
 
-ffmpeg.exe -loglevel error %input_args% %output_args% %lib% %scale_args% "%output%%format%"
+ffmpeg.exe -loglevel error %input_args% %output_args% %lib% %scale_args% "%input%%output%%format%"
 
 :: delete the job text file and
 del __ffmpeg_job.txt
