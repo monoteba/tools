@@ -87,11 +87,10 @@ echo.
 
 :: convert!
 set input_args=-i %input%
-set output_args=-c copy -b:v 0
-set scale_args=-vf scale=w=1920:h=1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2
+:: set scale_args=-vf scale=w=1920:h=1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2
 set scale_args=
 
-ffmpeg.exe -loglevel info %input_args% %output_args% %lib% %scale_args% "%input_path:"=%%output%%format%"
+ffmpeg.exe -loglevel info %input_args% %lib% %scale_args% %audio% "%input_path:"=%%output%%format%"
 
 echo.
 echo Done! Saved file to:
