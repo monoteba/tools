@@ -29,39 +29,44 @@ for %%a in (%input%) do (
 :prompt
 echo.
 echo Enter number of video format to use:
-echo 1: MP4 (H.264)
-echo 2: WebM (VP9)
-echo 3: Prores HQ (422)
-echo 4: Prores HQ (4444)
+echo 1: MP4 (H.264), AAC 256k audio
+echo 2: WebM (VP9), OPUS 256k audio
+echo 3: Prores HQ (422), PCM 16-bit audio
+echo 4: Prores HQ (4444), PCM 16-bit audio
 echo.
 
 set format=
 set lib=
+set audio=
 
 set /p format_option= Enter number:
 
 :: mp4 h.264
 if "%format_option%"=="1" (
 	set format=.mp4
-	set lib=-c:v libx264 -crf 30 
+	set lib=-c:v libx264 -crf 30
+	set audio=-c:a aac -b:a 256k
 )
 
 :: webm vp9
 if "%format_option%"=="2" (
 	set format=.webm
 	set lib=-c:v libvpx-vp9 -crf 30 
+	set audio=-c:a libopus -b:a 256k
 )
 
 :: prores 422
 if "%format_option%"=="3" (
 	set format=.mov
 	set lib=-c:v prores_ks -profile:v 3 -qscale:v 5 -vendor ap10 -pix_fmt yuv422p10le
+	set audio=-c:a pcm_s16le
 )
 
 :: prores 4444
 if "%format_option%"=="4" (
 	set format=.mov
 	set lib=-c:v prores_ks -profile:v 4444 -qscale:v 5 -vendor ap10 -pix_fmt yuva444p10le
+	set audio=-c:a pcm_s16le
 )
 
 if not defined format (
