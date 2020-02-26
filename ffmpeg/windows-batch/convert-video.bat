@@ -44,14 +44,14 @@ set /p format_option= Enter number:
 :: mp4 h.264
 if "%format_option%"=="1" (
 	set format=.mp4
-	set lib=-c:v libx264 -crf 30
+	set lib=-c:v libx264 -crf 18 -pix_fmt yuv420p
 	set audio=-c:a aac -b:a 256k
 )
 
 :: webm vp9
 if "%format_option%"=="2" (
 	set format=.webm
-	set lib=-c:v libvpx-vp9 -crf 30 
+	set lib=-c:v libvpx-vp9 -b:v 0 -crf 15
 	set audio=-c:a libopus -b:a 256k
 )
 
