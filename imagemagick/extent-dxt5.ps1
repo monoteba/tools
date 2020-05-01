@@ -1,6 +1,7 @@
 $images = Get-ChildItem -Filter *.png -Recurse;
 $count = $images.Count;
 $idx = 0;
+$divide = 4.0
 
 foreach ($img in $images)
 {
@@ -15,15 +16,15 @@ foreach ($img in $images)
 
     $modify = 0;
 
-    if (-NOT ($w % 4 -eq 0))
+    if (-NOT ($w % $divide -eq 0))
     {
-        $w = ([math]::truncate($w / 4.0) + 1) * 4;
+        $w = ([math]::truncate($w / $divide) + 1) * $divide;
         $modify++;
     }
 
-    if (-NOT ($h % 4 -eq 0))
+    if (-NOT ($h % $divide -eq 0))
     {
-        $h = ([math]::truncate($h / 4.0) + 1) * 4;
+        $h = ([math]::truncate($h / $divide) + 1) * $divide;
         $modify++;
     } 
 
